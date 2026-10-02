@@ -1,0 +1,251 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_source": "littlelemon",
+  "resources": [
+    {
+      "_id": "wrk_littlelemon",
+      "_type": "workspace",
+      "name": "Little Lemon API",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_base",
+      "_type": "environment",
+      "parentId": "wrk_littlelemon",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://127.0.0.1:8000",
+        "token": "PASTE_TOKEN_HERE"
+      }
+    },
+    {
+      "_id": "req_01",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "1. Register user",
+      "method": "POST",
+      "url": "{{ _.base_url }}/auth/users/",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"username\": \"reviewer\",\n  \"password\": \"Str0ngPass!\",\n  \"email\": \"reviewer@example.com\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1
+    },
+    {
+      "_id": "req_02",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "2. Get token",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api-token-auth/",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"username\": \"reviewer\",\n  \"password\": \"Str0ngPass!\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 2
+    },
+    {
+      "_id": "req_03",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "Menu - list",
+      "method": "GET",
+      "url": "{{ _.base_url }}/restaurant/menu/",
+      "body": {},
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": 3
+    },
+    {
+      "_id": "req_04",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "Menu - create",
+      "method": "POST",
+      "url": "{{ _.base_url }}/restaurant/menu/",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"title\": \"Greek Salad\",\n  \"price\": \"12.50\",\n  \"inventory\": 20\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Token {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 4
+    },
+    {
+      "_id": "req_05",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "Menu - get one",
+      "method": "GET",
+      "url": "{{ _.base_url }}/restaurant/menu/1",
+      "body": {},
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": 5
+    },
+    {
+      "_id": "req_06",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "Menu - update",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/restaurant/menu/1",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"title\": \"Greek Salad\",\n  \"price\": \"13.00\",\n  \"inventory\": 15\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Token {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 6
+    },
+    {
+      "_id": "req_07",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "Menu - delete",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/restaurant/menu/1",
+      "body": {},
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Token {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 7
+    },
+    {
+      "_id": "req_08",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "Booking - list",
+      "method": "GET",
+      "url": "{{ _.base_url }}/restaurant/booking/tables/",
+      "body": {},
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Token {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 8
+    },
+    {
+      "_id": "req_09",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "Booking - create",
+      "method": "POST",
+      "url": "{{ _.base_url }}/restaurant/booking/tables/",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Jimmy Doe\",\n  \"no_of_guests\": 4,\n  \"booking_date\": \"2026-12-13T19:00:00Z\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Token {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 9
+    },
+    {
+      "_id": "req_10",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "Booking - update",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/restaurant/booking/tables/1/",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Jimmy Doe\",\n  \"no_of_guests\": 6,\n  \"booking_date\": \"2026-12-13T20:00:00Z\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Token {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 10
+    },
+    {
+      "_id": "req_11",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "Booking - delete",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/restaurant/booking/tables/1/",
+      "body": {},
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Token {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 11
+    },
+    {
+      "_id": "req_12",
+      "_type": "request",
+      "parentId": "wrk_littlelemon",
+      "name": "Current user",
+      "method": "GET",
+      "url": "{{ _.base_url }}/auth/users/me/",
+      "body": {},
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Token {{ _.token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 12
+    }
+  ]
+}
